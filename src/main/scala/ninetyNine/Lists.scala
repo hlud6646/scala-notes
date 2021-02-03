@@ -11,7 +11,7 @@ package ninetyNine
 */
 
 object Lists extends App {
-
+  
   /**
   * 1. Find the last element of a list.
   */
@@ -231,6 +231,43 @@ object Lists extends App {
   }
   assert(insert('!', 2, "hello".toList) == "he!llo".toList)
 
+  /*
+   * 22. Create a range.
+   */ 
+  def range(i: Int, j: Int): List[Int] = 
+    if (j == i + 1) List(i, j) else i :: range(i + 1, j)
+  assert(range(2, 5) == List(2, 3, 4, 5))
+
+  /* 
+   * 23. Extract random selection. 
+   */
+  def randomSelect[T](n: Int, x: List[T]): List[T] = if (n == 0) Nil else {
+      val i = util.Random.nextInt(length(x))
+      val chosen = getAtIndex(i, x)
+      val rest   = remove(i, x)
+      chosen :: randomSelect(n - 1, rest._1)
+    }
+  
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

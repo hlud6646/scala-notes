@@ -1,7 +1,13 @@
-package problems
+package ninetyNine
 
 /**
-* Need to get scalacheck to run as well.
+* These are the classical 99 Prolog Problems, done in Scala (obviously).
+* Naive solutions are given, in an attempt to demonstrate some of the
+* features of the language. After each of these comes an assert statement
+* where the naive solution is compared to an idiomatic scala one.
+*
+* There are also tests, largely redundant but perhaps useful as a reference
+* on a few testing libraries.
 */
 
 object Lists extends App {
@@ -35,6 +41,7 @@ object Lists extends App {
     case 0 => items.head
     case n => getAtIndex(i - 1, items.tail)
   }
+  assert(getAtIndex(2, List(1, 2, 3, 4)) == List(1, 2, 3, 4)(2))
   // refer to test/scala/lists/problems.scala for validation
 
   /**
@@ -82,7 +89,6 @@ object Lists extends App {
     case head :: tail => head :: flatten(tail)
   }
   assert(flatten(List(1, 2, List(3, List(4, 5)))) == List(1, 2, 3, 4, 5))
-// If you have a nested nested list go and fix it upstream.
 
   /**
   * 8. Remove consecutive duplicates.
@@ -215,4 +221,16 @@ object Lists extends App {
     (slice(0, length(l) - 1, l) ::: r, getAtIndex(i, x))
   }
   assert(remove(4, "abcdefgh".toList) == ("abcdfgh".toList, 'e'))
+
+  /**
+  * 21. Insert at index.
+  */
+  def insert[T](y: T, i: Int, x: List[T]) = {
+    val (l, r) = split(i, x)
+    l ::: List(y) ::: r
+  }
+  assert(insert('!', 2, "hello".toList) == "he!llo".toList)
+
+
+
 }

@@ -1,3 +1,4 @@
+package ninetyNine
 import org.scalacheck._
 
 object ListSpecifications extends Properties("List") {

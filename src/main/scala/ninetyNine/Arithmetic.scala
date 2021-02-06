@@ -1,6 +1,6 @@
 package scala 
 
-object Arithmetic extends App {
+object Arithmetic {
 
   // 31. 
   def isPrime(n: Int) = (2 to math.pow(n, .5).toInt).forall(n % _ != 0)

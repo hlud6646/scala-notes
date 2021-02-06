@@ -3,14 +3,15 @@ package ninetyNine
 /**
 * These are the classical 99 Prolog Problems, done in Scala (obviously).
 * Naive solutions are given, in an attempt to demonstrate some of the
-* features of the language. After each of these comes an assert statement
-* where the naive solution is compared to an idiomatic scala one.
+* general features of the language as well as FP patterns.  After each of 
+* these comes an assert statement where the naive solution is compared 
+* to an idiomatic scala one.
 *
 * There are also tests, largely redundant but perhaps useful as a reference
 * on a few testing libraries.
 */
 
-object Lists extends App {
+object Lists {
   
   /**
   * 1. Find the last element of a list.
@@ -248,26 +249,43 @@ object Lists extends App {
       chosen :: randomSelect(n - 1, rest._1)
     }
   
+  /**
+   * 24. N random numbers in 1...M.
+   */
+  def lotto(n: Int, m: Int) = randomSelect(n, range(1, m))
 
+  /**
+   * 25. Random permutation of list.
+   */
+  def shuffle[T](x: List[T]) = randomSelect(length(x), x)
 
+  /**
+   * 26. Generate all combinations of n elements in x.
+   */
+  def combinations[T](n: Int, x: List[T]): List[List[T]] = 
+    if (n == 0) List(List[T]()) else (for {
+    i <- 0 until x.size
+    h = x(i)
+    remainder = x drop i + 1
+    rest <- combinations(n - 1, remainder)
+  } yield h :: rest).toList
+  assert("peach".toList.combinations(2).toList  == combinations(2, "peach".toList))
+
+  /**
+   * 27. Disjoint subsets. 
+   * Generate all arrangments of disjoint subsets, given a list of subset sizes.
+   */
+  def group[T](sizes: List[Int], x: List[T]): List[List[List[T]]] = 
+    if (sizes == Nil) List(List(List[T]()))  else (for {
+      c    <- x.combinations(sizes.head)
+      rest <- group(sizes.tail, x diff c)
+    } yield c :: rest).toList
+  // group(List(2, 3), "pineapl".toList) foreach println
+  
+  /**
+   * 28. Sort a list of sublist according to length of sublist, and by 
+   * sublength freq.
+   */
+  def lsort[T](x: List[List[T]]) = x.sortBy(_.size)
+  def lsortFreq[T](x: List[List[T]]) = x.groupBy(_.size).toList.sortBy(_._2.size).map(_._2).flatten
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

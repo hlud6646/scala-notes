@@ -1,6 +1,6 @@
 package ninetyNine 
 
-object Logic extends App {
+object Logic  {
 
   // 46.
   def and(a: Boolean, b: Boolean) = 
@@ -40,7 +40,7 @@ object Logic extends App {
    * on strings+lists of trees, define main method.
    */
   trait Tree
-  case class Fork(l: Tree, r: Tree, chars: List[Char], wieght: Int) extends Tree
+  case class Fork(l: Tree, r: Tree, chars: List[Char], weight: Int) extends Tree
   case class Node(char: Char, weight: Int) extends Tree
 
   def weight(t: Tree) = t match {

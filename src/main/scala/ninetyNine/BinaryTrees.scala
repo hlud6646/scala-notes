@@ -1,6 +1,6 @@
 package ninetyNine
 
-object BinaryTrees extends App {
+object BinaryTrees {
   
   trait Tree[+T] {
     def flip: Tree[T]

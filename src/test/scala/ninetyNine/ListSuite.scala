@@ -1,4 +1,4 @@
-package 99problems
+package ninetyNine
 
 import org.scalatest.funsuite.AnyFunSuite
 class ListSuite extends AnyFunSuite {

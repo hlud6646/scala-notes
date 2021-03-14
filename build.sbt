@@ -10,7 +10,12 @@ testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v", "-s")
 lazy val root = (project in file("."))
   .settings(
     name := "scalaNotes",
+    resolvers ++= Seq(
+      Resolver.sonatypeRepo("releases"),
+      Resolver.sonatypeRepo("snapshots")
+    ),
     libraryDependencies ++= Seq(
+      "com.chuusai"              %% "shapeless"          % "2.3.3",
       "com.typesafe.akka"        %% "akka-actor"         % "2.6.9",
       "com.typesafe.akka"        %% "akka-testkit"       % "2.6.9"     % Test,
       "com.novocode"             % "junit-interface"     % "0.11"      % Test,

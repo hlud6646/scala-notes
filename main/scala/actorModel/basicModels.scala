@@ -1,13 +1,13 @@
 package actorModel
 
-import akka.actor.{Actor, ActorRef, ActorSystem, Props}  
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 /** First example of an actor system:  ActorA receives a message and reports it. */
 object Model1 {
   final case object Message
   class ActorA extends Actor {
-    def receive = {
-      case Message => println("ActorA received a message.")
+    def receive = { case Message =>
+      println("ActorA received a message.")
     }
   }
 }
@@ -23,15 +23,14 @@ object Driver1 {
 object Model2 {
   final case class Message(content: String)
   class ActorB extends Actor {
-    def receive = {
-      case Message(content) => println(s"ActorB recieved the message: $content")
+    def receive = { case Message(content) =>
+      println(s"ActorB recieved the message: $content")
     }
   }
   class ActorA(forwardTo: ActorRef) extends Actor {
-    def receive = {
-      case Message(content) => 
-        println("ActorA recieved a message. Passing to ActorB.")
-        forwardTo ! Message(content)
+    def receive = { case Message(content) =>
+      println("ActorA recieved a message. Passing to ActorB.")
+      forwardTo ! Message(content)
     }
   }
 }
@@ -49,8 +48,8 @@ object Model2b {
   final case class Message(content: String, forwardTo: Option[ActorRef])
   class MyActor(var name: String) extends Actor {
     def receive = {
-      case Message(content, None)             => println(s"$name got message: $content")
-      case Message(content, Some(forwardTo))  => 
+      case Message(content, None) => println(s"$name got message: $content")
+      case Message(content, Some(forwardTo)) =>
         println(s"$name forwarding message.")
         forwardTo ! Message(content, None)
     }
@@ -72,9 +71,9 @@ object Model3 {
   case class Message(id: Int, content: String, sender: ActorRef)
   class MyActor extends Actor {
     def receive = {
-      case Message(id, content, sender) => 
+      case Message(id, content, sender) =>
         sender ! MessageReceived(id)
-      case MessageReceived(id) => 
+      case MessageReceived(id) =>
         println(s"Message $id was recieved.")
     }
   }

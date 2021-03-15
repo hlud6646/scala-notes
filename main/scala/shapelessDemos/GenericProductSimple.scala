@@ -11,7 +11,7 @@ import shapeless.{ HList, ::, HNil, Generic }
  *  not the only possible option, and so we expect that coding that part
  *  the logic is unavoidable.
  */
-object GenericProductSimple extends App {
+object GenericProductSimple {
 
   // A custom typeclass.
   trait Weighbridge[T] {

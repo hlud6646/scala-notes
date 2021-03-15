@@ -79,7 +79,7 @@ object Model3 {
     }
   }
 }
-object Driver3 extends App {
+object Driver3 {
   import Model3._
   val system = ActorSystem("Example")
   val a = system.actorOf(Props(classOf[MyActor]))

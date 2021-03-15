@@ -9,7 +9,7 @@ import shapeless.{ HList, ::, HNil, Generic }
  *  way to ascribe an integer (weight?) to things of type T. The weight of
  *  a product is the sum of the weight of its parts.  This last part is 
  *  not the only possible option, and so we expect that coding that part
- *  the logic is unavoidable.
+ *  of the logic is unavoidable.
  */
 object GenericProductSimple {
 

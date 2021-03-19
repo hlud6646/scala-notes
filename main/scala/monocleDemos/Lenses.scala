@@ -12,7 +12,7 @@ object Lenses extends App { def f: Any = {
    */
   val nameLens = Lens[Cat, String](_.name)(newName => cat => cat.copy(name = newName))
 
-  // This pattern is repetetive so there is a macro provided for convenience:
+  // This pattern is repetetive so there is a macro:
   import monocle.macros.GenLens
   val nameLens2: Lens[Cat, String] = GenLens[Cat](_.name)
 
@@ -21,7 +21,7 @@ object Lenses extends App { def f: Any = {
   nameLens.get(snowy)
   nameLens.set("Frosty")(snowy)
 
-  // There is a convenient wrapper for combinations of get and set:
+  // There is a convenient function if for Functor valued transformations:
   nameLens.modify(_ + " :)")(snowy)
   nameLens.set(nameLens.get(snowy) + " :)")(snowy)
 

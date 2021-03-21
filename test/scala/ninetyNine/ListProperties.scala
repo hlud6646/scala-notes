@@ -1,11 +1,9 @@
 package ninetyNine
+
 import org.scalacheck._
+import org.scalacheck.Prop.forAll
 
 object ListSpecifications extends Properties("List") {
-  import Prop.forAll
-  val propReverseList = forAll { l: List[String] => l.reverse.reverse == l }
-
-  // val getAtIndexEmpty = forAll { i: Int =>
-  //   assertThrows[Exception](Lists.getAtIndex(i, List()))
-  // }
+  property("ReverseIsSelfInverse") = 
+    forAll { l: List[String] => l.reverse.reverse == l }
 }

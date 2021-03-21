@@ -1,6 +1,6 @@
 package ninetyNine
-
 import org.scalatest.funsuite.AnyFunSuite
+
 class ListSuite extends AnyFunSuite {
 
     test("Calling last on an empty list should raise Exception"){

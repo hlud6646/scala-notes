@@ -57,24 +57,20 @@ object Lenses extends App { def f: Any = {
   case class Family(paterfamilias: Cat, tabby: Boolean)
   val fam = Family(snowy, false)
   val catLens = GenLens[Family](_.paterfamilias)
-  def greetTheBoss(f: Family): String = 
-    "Hiiii " + (catLens composeLens nameLens).get(f)
-  greetTheBoss(fam)
-
+  "Hiiii " + (catLens composeLens nameLens).get(fam)
   
+  // Or with macro syntax:
+  import monocle.macros.syntax.lens._
+  "Hiiii " + fam.lens(_.paterfamilias).get.lens(_.name).get
+
+  // Or even more automated:
+  import monocle.macros.Lenses
+  @Lenses case class Dog(name: String, age: Int)
+  @Lenses case class Litter(paterfamilias: Dog, spotty: Boolean)
+  val spot = Dog("Spot", 3)
+  val olderSpot = Dog.age.set(4)(spot)
+  olderSpot
   
+  // See ./LensLaws.scala for a demonstration of testing lens laws. 
 
-
-
-
-  }
-
-
-
-
-
-
-
-
-
-println(f) }
+}; println(f) }
